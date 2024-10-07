@@ -1,0 +1,26 @@
+#include "DHT.h"
+#define DHTPIN 7
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+int sensorValue;
+
+void setup() {
+  // put your setup code here, to run once:
+  dht.begin();
+  Serial.begin(9600); // alustetaan sarjaviestintä
+  pinMode(DHTPIN, INPUT); // määritetään sensorPin inputiksi
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  readTemp();
+}
+
+void readTemp() {
+  sensorValue = dht.readTemperature(); //luetaan sensori
+
+  Serial.print("Current temp: ");
+  Serial.println(sensorValue);
+}
